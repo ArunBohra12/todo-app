@@ -1,6 +1,23 @@
+import jwt from 'jsonwebtoken';
+
 import User from '../models/userModel.js';
 import AppError from '../utils/appError.js';
 import catchAsync from '../utils/catchAsync.js';
+
+const signJwtAuthToken = data => {
+  const token = jwt.sign(
+    {
+      iat: Math.floor(Date.now() / 1000) - 30,
+      ...data,
+    },
+    process.env.AUTH_JWT_SIGNING_SECRET,
+    {
+      expiresIn: process.env.AUTH_JWT_EXPIRY,
+    }
+  );
+
+  return token;
+};
 
 const signup = catchAsync(async (req, res, next) => {
   const { name, email, password, confirmPassword } = req.body;
@@ -21,9 +38,14 @@ const signup = catchAsync(async (req, res, next) => {
   // Prevent to send sensitive data in the result
   user.password = undefined;
 
+  const authToken = signJwtAuthToken({ id: user.id });
+
   res.status(200).json({
     status: 'success',
-    data: user,
+    data: {
+      token: authToken,
+      user,
+    },
   });
 });
 
@@ -44,13 +66,44 @@ const login = catchAsync(async (req, res, next) => {
     return next(new AppError('Wrong email or password', 400));
   }
 
+  const authToken = signJwtAuthToken({ id: user.id });
   return res.status(200).json({
     status: 'success',
     message: 'Login successful',
+    data: {
+      token: authToken,
+    },
   });
+});
+
+const protect = catchAsync(async (req, res, next) => {
+  const { authorization } = req.headers;
+
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return next(new AppError("Can't authorize. Invalid token provided", 400));
+  }
+
+  const token = authorization.split('Bearer ')[1];
+  const authorizationTokenData = jwt.verify(token, process.env.AUTH_JWT_SIGNING_SECRET);
+
+  if (!authorizationTokenData) {
+    return next(new AppError('Invalid token', 400));
+  }
+
+  const { id: userId } = authorizationTokenData;
+
+  const user = await User.findById(userId);
+
+  if (user.id !== userId) {
+    return next(new AppError('Courropt token', 400));
+  }
+
+  req.user = user;
+  next();
 });
 
 export default {
   signup,
   login,
+  protect,
 };
