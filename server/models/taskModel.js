@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 
+const taskStatuses = {
+  todo: 'todo',
+  done: 'done',
+};
+
 const taskSchema = new mongoose.Schema(
   {
     title: {
@@ -10,6 +15,11 @@ const taskSchema = new mongoose.Schema(
     startDate: {
       type: Date,
       default: Date.now(),
+    },
+    status: {
+      type: String,
+      enum: [taskStatuses.todo, taskStatuses.done],
+      default: taskStatuses.todo,
     },
     endDate: {
       type: Date,
