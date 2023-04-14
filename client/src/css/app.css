@@ -1,0 +1,45 @@
+@import './variables.css';
+
+/* Global reset */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: var(--font-primary);
+  font-size: 1.6rem;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root,
+.app {
+  height: 100%;
+}
+
+/* HTML Elements */
+
+input {
+  border: none;
+  outline: none;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}

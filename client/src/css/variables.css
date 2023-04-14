@@ -1,0 +1,12 @@
+:root {
+  /* FONT VARIABLES */
+  --font-primary: 'Source Sans Pro', sans-serif;
+
+  /* COLOR VARIABLES */
+  --color-white: #fff;
+  --color-red: #e81123;
+
+  /* BOX-MODEL VARIABLES */
+  --border-radius-normal: 5px;
+  --box-shadow-normal: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
