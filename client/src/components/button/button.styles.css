@@ -1,0 +1,20 @@
+.btn {
+  padding: 0.4rem 1.2rem;
+  height: 3.5rem;
+  width: 10rem;
+  cursor: pointer;
+  border-radius: var(--border-radius-normal);
+  -webkit-border-radius: var(--border-radius-normal);
+  -moz-border-radius: var(--border-radius-normal);
+  -ms-border-radius: var(--border-radius-normal);
+  -o-border-radius: var(--border-radius-normal);
+}
+
+.btn-blue {
+  background-color: var(--color-blue-primary);
+  color: var(--color-white);
+}
+
+.btn-blue:hover {
+  background-color: var(--color-blue-primary-dark);
+}

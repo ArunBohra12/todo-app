@@ -5,6 +5,11 @@
   /* COLOR VARIABLES */
   --color-white: #fff;
   --color-red: #e81123;
+  --color-blue-primary: #0067b8;
+  --color-blue-primary-dark: #005da6;
+
+  /* ANIMATION VARIABLES */
+  --transition-time-normal: 0.3s;
 
   /* BOX-MODEL VARIABLES */
   --border-radius-normal: 5px;

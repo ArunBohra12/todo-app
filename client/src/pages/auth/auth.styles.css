@@ -1,0 +1,86 @@
+.auth-page {
+  height: 100%;
+  background-image: url('../../assets/img/gradient-background.svg');
+  display: grid;
+  place-items: center;
+}
+
+.auth-form-container {
+  width: 44rem;
+  padding: 4.4rem;
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow-normal);
+
+  border-radius: var(--border-radius-normal);
+  -webkit-border-radius: var(--border-radius-normal);
+  -moz-border-radius: var(--border-radius-normal);
+  -ms-border-radius: var(--border-radius-normal);
+  -o-border-radius: var(--border-radius-normal);
+}
+
+.auth-form__header {
+  display: flex;
+  align-items: center;
+}
+
+.auth-form__logo-img {
+  width: 3rem;
+  height: 2.4rem;
+  margin-right: 1.5rem;
+}
+
+.auth-form__heading {
+  font-weight: 600;
+  font-size: 2.4rem;
+}
+
+.auth-form__submit-btn {
+  margin-top: 2.2rem;
+  margin-left: auto;
+  font-size: 1.8rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.2rem;
+}
+
+.auth-form > input {
+  font-size: 1.8rem;
+}
+
+.auth-form > input:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.show-password-label {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.show-password-label input {
+  margin-right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .auth-page {
+    background: #fff;
+    place-items: start;
+  }
+
+  .auth-form-container {
+    width: 90%;
+    padding: 1rem;
+    margin: auto;
+    margin-top: 5rem;
+    box-shadow: none;
+  }
+
+  .auth-form__heading {
+    font-size: 2rem;
+  }
+}
