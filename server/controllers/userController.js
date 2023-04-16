@@ -6,9 +6,6 @@ const getProfile = catchAsync(async (req, res) => {
 
   const user = await User.findById(id);
 
-  // Remove verbose from the response
-  user.__v = undefined;
-
   return res.status(200).json({
     status: 'success',
     data: {
