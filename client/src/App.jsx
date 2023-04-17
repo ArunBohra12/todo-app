@@ -1,13 +1,12 @@
-import { Routes, Route } from 'react-router-dom';
-import Login from './pages/auth/login/login.page';
-import Signup from './pages/auth/signup/signup.page';
 import Loader from './components/loader/loader.component';
 import AuthContext from './context/auth.context';
+import PreAuthRoutes from './routes/preAuthRoutes';
+import PostAuthRoutes from './routes/postAuthRoutes';
 
 import './css/app.css';
 
 const App = () => {
-  const { isLoading } = AuthContext();
+  const { isLoading, isAuthenticated } = AuthContext();
 
   if (isLoading === true) {
     return (
@@ -19,11 +18,8 @@ const App = () => {
 
   return (
     <div className='app'>
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/' element={<Login />} />
-      </Routes>
+      {/* prettier-ignore */}
+      {isAuthenticated === true ? <PostAuthRoutes /> : <PreAuthRoutes />}
     </div>
   );
 };
