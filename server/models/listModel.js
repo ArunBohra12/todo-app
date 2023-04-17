@@ -11,6 +11,10 @@ const listSchema = new mongoose.Schema({
       ref: 'Task',
     },
   ],
+  createdBy: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 const List = mongoose.model('List', listSchema);
