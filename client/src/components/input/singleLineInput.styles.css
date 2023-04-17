@@ -2,6 +2,10 @@
   padding: 0.6rem 1rem 0.6rem 0;
   border-bottom: 1px solid #323232;
   transition: border var(--transition-time-normal);
+  -webkit-transition: border var(--transition-time-normal);
+  -moz-transition: border var(--transition-time-normal);
+  -ms-transition: border var(--transition-time-normal);
+  -o-transition: border var(--transition-time-normal);
 }
 
 .single-line-input:focus {

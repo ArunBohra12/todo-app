@@ -21,6 +21,7 @@ body {
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.5;
+  color: var(--color-black);
   height: 100vh;
   overflow: hidden;
 }
@@ -28,6 +29,12 @@ body {
 #root,
 .app {
   height: 100%;
+}
+
+.app.content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* HTML Elements */
@@ -44,4 +51,5 @@ button {
 
 a {
   text-decoration: none;
+  display: inline-block;
 }

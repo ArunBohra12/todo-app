@@ -11,8 +11,13 @@
 }
 
 .btn-blue {
-  background-color: var(--color-blue-primary);
   color: var(--color-white);
+  background-color: var(--color-blue-primary);
+  transition: background-color var(--transition-time-normal);
+  -webkit-transition: background-color var(--transition-time-normal);
+  -moz-transition: background-color var(--transition-time-normal);
+  -ms-transition: background-color var(--transition-time-normal);
+  -o-transition: background-color var(--transition-time-normal);
 }
 
 .btn-blue:hover {

@@ -66,12 +66,15 @@ const login = catchAsync(async (req, res, next) => {
     return next(new AppError('Wrong email or password', 400));
   }
 
+  user.password = undefined;
+
   const authToken = signJwtAuthToken({ id: user.id });
   return res.status(200).json({
     status: 'success',
     message: 'Login successful',
     data: {
       token: authToken,
+      user,
     },
   });
 });
@@ -93,6 +96,10 @@ const protect = catchAsync(async (req, res, next) => {
   const { id: userId } = authorizationTokenData;
 
   const user = await User.findById(userId);
+
+  if (!user) {
+    return next(new AppError('User not found.', 400));
+  }
 
   if (user.id !== userId) {
     return next(new AppError('Courropt token', 400));

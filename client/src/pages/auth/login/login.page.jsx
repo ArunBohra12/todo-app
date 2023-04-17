@@ -1,16 +1,34 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/logo/logo-small.png';
 import Button from '../../../components/button/button.component';
 import SingleLineInput from '../../../components/input/singleLineInput.comopnent';
+import AuthContext from '../../../context/auth.context';
+import { login } from '../../../api/auth';
+import { AUTH_TOKEN_STORAGE_KEY } from '../../../config/constants';
+import { successToast } from '../../../utils/toast';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
-  const loginSubmitHandler = e => {
+  const { setUser } = AuthContext();
+
+  const loginSubmitHandler = async e => {
     e.preventDefault();
+
+    const loginData = await login({ email, password });
+
+    if (!loginData) return;
+
+    successToast('Login successful');
+
+    const { token, user } = loginData;
+
+    localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
+    setUser(user);
   };
 
   return (
@@ -44,6 +62,12 @@ const Login = () => {
             />
             <span>Show password</span>
           </label>
+
+          <div>
+            <Link to='/signup' className='switch-auth-page'>
+              No Account? Create one!
+            </Link>
+          </div>
 
           <Button className='auth-form__submit-btn'>Login</Button>
         </form>

@@ -1,7 +1,5 @@
-import { ENV_MODE } from '../config/constants';
+import { ENV_MODE, GENERIC_ERROR_MESSAGE } from '../config/constants';
 import { errorToast } from './toast';
-
-const GENERIC_ERROR_MESSAGE = 'Sorry, something went wrong';
 
 const handleAxiosError = error => {
   const errorMessage = error.response.data.message || GENERIC_ERROR_MESSAGE;
@@ -19,16 +17,15 @@ const handleAxiosError = error => {
 const handleAsync = asyncFunc => {
   return async (...args) => {
     try {
-      return await asyncFunc(args);
+      return await asyncFunc(...args);
     } catch (error) {
       if (error.isAxiosError) {
         handleAxiosError(error);
         return;
       }
 
-      if (ENV_MODE === 'production') {
-        errorToast(GENERIC_ERROR_MESSAGE);
-        return;
+      if (ENV_MODE !== 'production') {
+        console.error(error);
       }
 
       errorToast(error.message || GENERIC_ERROR_MESSAGE);
