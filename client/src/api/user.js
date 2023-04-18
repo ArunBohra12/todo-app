@@ -1,5 +1,5 @@
 import { AUTH_TOKEN_STORAGE_KEY } from '../config/constants';
-import serverRequestInstance from '../utils/axios';
+import axiosRequestInstance from '../utils/axios';
 import handleAsync from '../utils/error';
 
 export const getUserProfile = handleAsync(async () => {
@@ -9,7 +9,7 @@ export const getUserProfile = handleAsync(async () => {
     return [false];
   }
 
-  const { data: responseData } = await serverRequestInstance({
+  const { data: responseData } = await axiosRequestInstance({
     url: '/user/profile',
     headers: {
       Authorization: `Bearer ${token}`,

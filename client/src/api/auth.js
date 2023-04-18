@@ -1,5 +1,5 @@
 import { GENERIC_ERROR_MESSAGE } from '../config/constants';
-import serverRequestInstance from '../utils/axios';
+import axiosRequestInstance from '../utils/axios';
 import handleAsync from '../utils/error';
 
 export const signup = handleAsync(async ({ name, email, password, confirmPassword }) => {
@@ -11,7 +11,7 @@ export const signup = handleAsync(async ({ name, email, password, confirmPasswor
     throw new Error('Passwords do not match.');
   }
 
-  const response = await serverRequestInstance({
+  const response = await axiosRequestInstance({
     url: '/auth/signup',
     method: 'POST',
     data: {
@@ -34,7 +34,7 @@ export const login = handleAsync(async ({ email, password }) => {
     throw new Error('Please provide all the details.');
   }
 
-  const response = await serverRequestInstance({
+  const response = await axiosRequestInstance({
     url: '/auth/login',
     method: 'POST',
     data: { email, password },
