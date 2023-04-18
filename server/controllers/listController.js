@@ -38,7 +38,6 @@ const getAllLists = catchAsync(async (req, res) => {
 
 const addTaskToList = catchAsync(async (req, res, next) => {
   const { listId } = req.params;
-  const { id: userId } = req.user;
   const { taskId } = req.body;
 
   if (!taskId) {

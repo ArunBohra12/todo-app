@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
+import { allUserAvatars, defaultUserAvatar } from '../config/user.js';
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -17,6 +19,11 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Please provide a password'],
       select: false,
       minLength: 8,
+    },
+    avatar: {
+      type: String,
+      enum: allUserAvatars,
+      default: defaultUserAvatar,
     },
     confirmPassword: {
       type: String,
