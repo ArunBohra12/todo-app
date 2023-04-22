@@ -3,19 +3,21 @@
   --font-primary: 'Source Sans Pro', sans-serif;
 
   /* COLOR VARIABLES */
-  --color-white: #fff;
+  --color-white: #fafafa;
   --color-red: #e81123;
   /* --color-blue-primary: #1a6095; */
   --color-blue-primary: #0067b8;
   --color-blue-primary-dark: #005da6;
   --color-gray: #666;
+  --color-gray-light: #bababa;
   --color-black: #1b1b1b;
 
   /* ANIMATION VARIABLES */
   --transition-time-normal: 0.3s;
-  --transition-time-slow: 0.2s;
+  --transition-time-fast: 0.2s;
 
   /* BOX-MODEL VARIABLES */
   --border-radius-normal: 5px;
   --box-shadow-normal: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --box-shadow-small: 0px 0.3px 0.9px rgba(0, 0, 0, 0.1), 0px 1.6px 3.6px rgba(0, 0, 0, 0.1);
 }

@@ -1,4 +1,5 @@
 export const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+export const AVATARS_URL = import.meta.env.VITE_SERVER_AVATARS_URL;
 export const ENV_MODE = import.meta.env.MODE;
 
 export const GENERIC_ERROR_MESSAGE = 'Sorry something went wrong';

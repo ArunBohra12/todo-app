@@ -4,7 +4,7 @@ import { AUTH_TOKEN_STORAGE_KEY } from '../config/constants';
 
 const INITIAL_AUTH_STATE = {
   isLoading: true,
-  error: null,
+  hasError: null,
   isAuthenticated: false,
   user: {},
   setUser: () => {},
