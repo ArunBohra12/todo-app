@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   MdOutlineSearch as SearchIcon,
   MdClear as CrossIcon,
@@ -14,9 +15,26 @@ import SidebarList from '../sidebarList/sidebarList.component';
 
 import './sidebar.styles.css';
 
+export const sidebarSmartList = [
+  {
+    id: 'my-day',
+    title: 'My Day',
+    icon: <DayIcon />,
+  },
+  {
+    id: 'important',
+    title: 'Important',
+    icon: <StarIcon />,
+  },
+];
+
 const Sidebar = () => {
-  const { lists } = ListContext();
+  const { lists, selectedList, setSelectedList } = ListContext();
   const { user } = AuthContext();
+
+  const handleSidebarListSelection = (type, id) => {
+    setSelectedList(type, id);
+  };
 
   return (
     <aside className='sidebar'>
@@ -37,15 +55,28 @@ const Sidebar = () => {
       </div>
 
       <div className='sidebar__smart-list'>
-        <SidebarList title='My Day' icon={<DayIcon />} selected />
-        <SidebarList title='Important' icon={<StarIcon />} />
+        {sidebarSmartList.map(smartListItem => (
+          <SidebarList
+            key={smartListItem.id}
+            icon={smartListItem.icon}
+            title={smartListItem.title}
+            selected={selectedList.type === 'smart-list' && selectedList.id === smartListItem.id}
+            onClick={() => handleSidebarListSelection('smart-list', smartListItem.id)}
+          />
+        ))}
       </div>
 
       <div className='sidebar__list-separator'></div>
 
       <div className='sidebar__all-lists'>
         {lists.map(list => (
-          <SidebarList key={list._id} title={list.name} icon={<ListIcon />} />
+          <SidebarList
+            key={list._id}
+            title={list.name}
+            icon={<ListIcon />}
+            selected={selectedList.type === 'custom-list' && selectedList.id === list._id}
+            onClick={() => handleSidebarListSelection('custom-list', list._id)}
+          />
         ))}
       </div>
 
