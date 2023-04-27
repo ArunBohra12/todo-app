@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   MdOutlineSearch as SearchIcon,
   MdClear as CrossIcon,
@@ -33,6 +32,8 @@ const Sidebar = () => {
   const { user } = AuthContext();
 
   const handleSidebarListSelection = (type, id) => {
+    if (type === selectedList.type && id === selectedList.id) return;
+
     setSelectedList(type, id);
   };
 
@@ -50,7 +51,12 @@ const Sidebar = () => {
 
       <div className='sidebar__search'>
         <SearchIcon className='sidebar__search-icon' />
-        <input className='sidebar__search-input' type='text' placeholder='Search' />
+        <input
+          className='sidebar__search-input'
+          type='text'
+          placeholder='Search'
+          onChange={e => handleSidebarListSelection('search', e.target.value)}
+        />
         <CrossIcon className='sidebar__search-icon' />
       </div>
 
