@@ -111,7 +111,7 @@
 
 .sidebar__list-separator {
   margin: 1.5rem 0;
-  height: 0.1px;
+  height: 1px;
   background-color: var(--color-gray);
 }
 

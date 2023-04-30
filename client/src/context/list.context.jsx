@@ -1,5 +1,5 @@
 import { useEffect, createContext, useContext, useReducer } from 'react';
-import { getAllLists } from '../api/list';
+import { getAllLists, getCustomListDetails, getSmartListDetails } from '../api/list';
 
 const INITIAL_LIST_STATE = {
   hasError: false,
@@ -9,6 +9,7 @@ const INITIAL_LIST_STATE = {
     type: 'smart-list',
     id: 'my-day',
   },
+  selectedListData: {},
 };
 
 const Context = createContext();
@@ -30,6 +31,7 @@ const LIST_REDUCER_ACTION_TYPES = {
   SET_LISTS_DATA: 'SET_LISTS_DATA',
   SET_IS_LOADING: 'SET_IS_LOADING',
   SET_SELECTED_LIST: 'SET_SELECTED_LIST',
+  SET_SELECTED_LIST_DATA: 'SET_SELECTED_LIST_DATA',
 };
 
 const listReducer = (state = INITIAL_LIST_STATE, action) => {
@@ -44,6 +46,8 @@ const listReducer = (state = INITIAL_LIST_STATE, action) => {
       return { ...state, lists: payload };
     case LIST_REDUCER_ACTION_TYPES.SET_SELECTED_LIST:
       return { ...state, selectedList: payload };
+    case LIST_REDUCER_ACTION_TYPES.SET_SELECTED_LIST_DATA:
+      return { ...state, selectedListData: payload };
     default:
       console.error(`Unexpected reducer action type: ${type} in listReducer`);
   }
@@ -53,11 +57,36 @@ export const ListProvider = props => {
   const { children } = props;
   const [state, dispatch] = useReducer(listReducer, INITIAL_LIST_STATE);
 
+  const setSelectedList = async (type, id) => {
+    dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_IS_LOADING, payload: true });
+    dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_SELECTED_LIST, payload: { type, id } });
+
+    await setSelectedListData(type, id);
+
+    dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_IS_LOADING, payload: false });
+  };
+
+  const setSelectedListData = async (selectedListType, selectedListId) => {
+    let listData = {};
+
+    if (selectedListType === 'smart-list') {
+      listData = await getSmartListDetails(selectedListId);
+    } else {
+      listData = await getCustomListDetails(selectedListId);
+    }
+
+    dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_SELECTED_LIST_DATA, payload: listData });
+  };
+
+  // GETTING ALL THE LISTS AND SELECTED LIST DATA
   useEffect(() => {
     (async () => {
       dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_IS_LOADING, payload: true });
 
-      const lists = await getListsData();
+      const [lists] = await Promise.all([
+        getListsData(),
+        setSelectedListData(state.selectedList.type, state.selectedList.id),
+      ]);
 
       if (lists) {
         dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_LISTS_DATA, payload: lists });
@@ -66,10 +95,6 @@ export const ListProvider = props => {
       dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_IS_LOADING, payload: false });
     })();
   }, []);
-
-  const setSelectedList = (type, id) => {
-    dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_SELECTED_LIST, payload: { type, id } });
-  };
 
   const value = {
     ...state,

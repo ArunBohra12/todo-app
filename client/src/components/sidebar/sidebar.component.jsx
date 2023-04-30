@@ -31,10 +31,10 @@ const Sidebar = () => {
   const { lists, selectedList, setSelectedList } = ListContext();
   const { user } = AuthContext();
 
-  const handleSidebarListSelection = (type, id) => {
+  const handleSidebarListSelection = async (type, id) => {
     if (type === selectedList.type && id === selectedList.id) return;
 
-    setSelectedList(type, id);
+    await setSelectedList(type, id);
   };
 
   return (
@@ -55,7 +55,7 @@ const Sidebar = () => {
           className='sidebar__search-input'
           type='text'
           placeholder='Search'
-          onChange={e => handleSidebarListSelection('search', e.target.value)}
+          onChange={async e => handleSidebarListSelection('search', e.target.value)}
         />
         <CrossIcon className='sidebar__search-icon' />
       </div>
@@ -67,12 +67,12 @@ const Sidebar = () => {
             icon={smartListItem.icon}
             title={smartListItem.title}
             selected={selectedList.type === 'smart-list' && selectedList.id === smartListItem.id}
-            onClick={() => handleSidebarListSelection('smart-list', smartListItem.id)}
+            onClick={async () => handleSidebarListSelection('smart-list', smartListItem.id)}
           />
         ))}
       </div>
 
-      <div className='sidebar__list-separator'></div>
+      {lists.length > 0 && <div className='sidebar__list-separator'></div>}
 
       <div className='sidebar__all-lists'>
         {lists.map(list => (
@@ -81,7 +81,7 @@ const Sidebar = () => {
             title={list.name}
             icon={<ListIcon />}
             selected={selectedList.type === 'custom-list' && selectedList.id === list._id}
-            onClick={() => handleSidebarListSelection('custom-list', list._id)}
+            onClick={async () => handleSidebarListSelection('custom-list', list._id)}
           />
         ))}
       </div>

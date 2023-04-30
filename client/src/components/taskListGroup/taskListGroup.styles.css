@@ -1,0 +1,17 @@
+.task-list-group-loading {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-list-group-container {
+  padding: 1rem 2.5rem;
+}
+
+.task-list-group-heading {
+  color: var(--color-blue-primary);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}

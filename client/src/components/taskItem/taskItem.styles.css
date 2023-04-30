@@ -1,0 +1,59 @@
+.task-box {
+  padding: 1.6rem;
+  border-radius: 5px;
+  box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.1), 0 1.5px 4px 0.5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.task-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.8rem;
+  width: 1.8rem;
+  cursor: pointer;
+  border: 2px solid var(--color-blue-primary);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.check-icon {
+  height: 1.3rem;
+  width: 1.3rem;
+  fill: var(--color-blue-primary);
+  opacity: 0;
+  transition: opacity var(--transition-time-fast);
+  -webkit-transition: opacity var(--transition-time-fast);
+  -moz-transition: opacity var(--transition-time-fast);
+  -ms-transition: opacity var(--transition-time-fast);
+  -o-transition: opacity var(--transition-time-fast);
+}
+
+.task-checkbox:hover > .check-icon {
+  opacity: 1;
+}
+
+.task-details {
+  margin: 0 auto 0 2rem;
+}
+
+.mark-as-important {
+  display: flex;
+  align-items: center;
+}
+
+.mark-as-important svg {
+  height: 2.2rem;
+  width: 2.2rem;
+  fill: var(--color-blue-primary);
+  cursor: pointer;
+}
+
+.important-task-icon {
+  animation: fadeIn var(--transition-time-normal) linear;
+  -webkit-animation: fadeIn var(--transition-time-normal) linear;
+}
