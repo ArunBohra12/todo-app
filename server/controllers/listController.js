@@ -1,6 +1,6 @@
-import List from '../models/listModel.js';
 import catchAsync from '../utils/catchAsync.js';
 import AppError from '../utils/appError.js';
+import List from '../models/listModel.js';
 
 const createList = catchAsync(async (req, res, next) => {
   const { id: userId } = req.user;
@@ -54,8 +54,31 @@ const addTaskToList = catchAsync(async (req, res, next) => {
   });
 });
 
+const getCustomListDetails = catchAsync(async (req, res, next) => {
+  const { id } = req.user;
+  const { listId } = req.params;
+
+  const list = await List.findOne({
+    _id: listId,
+    createdBy: id,
+  }).populate('tasks');
+
+  if (!list) {
+    return next(new AppError('List with that id can not be found', 400));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      listName: list.name,
+      tasks: list.tasks,
+    },
+  });
+});
+
 export default {
   getAllLists,
   createList,
   addTaskToList,
+  getCustomListDetails,
 };

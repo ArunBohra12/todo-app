@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import SmartList from '../models/smartListModel.js';
 
 import User from '../models/userModel.js';
 import AppError from '../utils/appError.js';
@@ -34,6 +35,18 @@ const signup = catchAsync(async (req, res, next) => {
   };
 
   const user = await User.create(userData);
+
+  // Create smart lists for the user
+  const smartLists = ['my-day', 'important'];
+
+  await Promise.all(
+    smartLists.map(list => {
+      return SmartList.create({
+        user: user.id,
+        type: list,
+      });
+    })
+  );
 
   // Prevent to send sensitive data in the result
   user.password = undefined;
