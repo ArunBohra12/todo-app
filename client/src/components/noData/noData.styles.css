@@ -1,0 +1,14 @@
+.no-data-msg-container {
+  height: 100%;
+  text-align: center;
+}
+
+.no-data-image {
+  width: 400px;
+  margin-top: 2rem;
+}
+
+.no-data-message {
+  font-size: 1.5rem;
+  color: var(--color-black);
+}
