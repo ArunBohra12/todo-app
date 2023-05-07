@@ -7,6 +7,9 @@
 
 .task-list-group-container {
   padding: 1rem 2.5rem;
+  background-color: var(--color-white-2);
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
 }
 
 .task-list-group-heading {
