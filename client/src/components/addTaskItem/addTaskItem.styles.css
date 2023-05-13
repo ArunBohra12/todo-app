@@ -1,0 +1,37 @@
+.add-task-item-container {
+  background-color: var(--color-white-2);
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.add-task-input-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.add-task-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+  width: 3.5rem;
+  border-bottom-left-radius: var(--border-radius-normal);
+  border-top-left-radius: var(--border-radius-normal);
+  order: -1;
+}
+
+.add-task-icon svg {
+  height: 2rem;
+  width: 2rem;
+}
+
+.add-task-input {
+  background-color: #f3f3f3;
+  flex-grow: 1;
+  padding: 1.35rem 1rem;
+  font-size: 1.6rem;
+  border-bottom-right-radius: var(--border-radius-normal);
+  border-top-right-radius: var(--border-radius-normal);
+}

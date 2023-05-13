@@ -5,11 +5,31 @@
   align-items: center;
 }
 
-.task-list-group-container {
-  padding: 1rem 2.5rem;
-  background-color: var(--color-white-2);
+.task-list-section {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 7rem 1fr 10rem;
   animation-name: fadeIn;
-  animation-duration: 1.5s;
+  animation-duration: 1.2s;
+}
+
+.task-list-group-container {
+  padding: 3rem 2.5rem;
+  background-color: var(--color-white-2);
+  position: relative;
+  overflow-y: scroll;
+}
+
+.task-list-container {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.task-list-group-heading-container {
+  padding: 1rem 2.5rem;
+  inset: 0;
+  width: 100%;
+  background-color: var(--color-white-2);
 }
 
 .task-list-group-heading {

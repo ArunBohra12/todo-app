@@ -1,5 +1,4 @@
 /* Fade in animation */
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -12,14 +11,15 @@
 
 /* Spin animation */
 @keyframes spin {
-  0% {
+  from {
     transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     -o-transform: rotate(0deg);
   }
-  100% {
+
+  to {
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
     -moz-transform: rotate(360deg);

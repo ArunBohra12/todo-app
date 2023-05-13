@@ -24,7 +24,6 @@ body {
   line-height: 1.5;
   color: var(--color-black);
   height: 100vh;
-  overflow: hidden;
 }
 
 #root,
