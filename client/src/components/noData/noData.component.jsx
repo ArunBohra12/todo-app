@@ -1,4 +1,4 @@
-import noDataImage from '../../assets/img/no-data.jpg';
+import noDataImage from '../../assets/img/no-data.gif';
 
 import './noData.styles.css';
 
