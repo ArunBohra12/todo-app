@@ -37,6 +37,15 @@ const Sidebar = () => {
     await setSelectedList(type, id);
   };
 
+  const taskSearchHandler = async e => {
+    if (e.target.value === '') {
+      handleSidebarListSelection('smart-list', 'my-day');
+      return;
+    }
+
+    handleSidebarListSelection('search', e.target.value);
+  };
+
   return (
     <aside className='sidebar'>
       <div className='sidebar__profile'>
@@ -51,12 +60,7 @@ const Sidebar = () => {
 
       <div className='sidebar__search'>
         <SearchIcon className='sidebar__search-icon' />
-        <input
-          className='sidebar__search-input'
-          type='text'
-          placeholder='Search'
-          onChange={async e => handleSidebarListSelection('search', e.target.value)}
-        />
+        <input className='sidebar__search-input' type='text' placeholder='Search' onChange={taskSearchHandler} />
         <CrossIcon className='sidebar__search-icon' />
       </div>
 
@@ -67,7 +71,7 @@ const Sidebar = () => {
             icon={smartListItem.icon}
             title={smartListItem.title}
             selected={selectedList.type === 'smart-list' && selectedList.id === smartListItem.id}
-            onClick={async () => handleSidebarListSelection('smart-list', smartListItem.id)}
+            onClick={() => handleSidebarListSelection('smart-list', smartListItem.id)}
           />
         ))}
       </div>
@@ -81,7 +85,7 @@ const Sidebar = () => {
             title={list.name}
             icon={<ListIcon />}
             selected={selectedList.type === 'custom-list' && selectedList.id === list._id}
-            onClick={async () => handleSidebarListSelection('custom-list', list._id)}
+            onClick={() => handleSidebarListSelection('custom-list', list._id)}
           />
         ))}
       </div>

@@ -1,5 +1,5 @@
 import { useEffect, createContext, useContext, useReducer } from 'react';
-import { getAllLists, getCustomListDetails, getSmartListDetails } from '../api/list';
+import { getAllLists, getCustomListDetails, getSearchListDetails, getSmartListDetails } from '../api/list';
 
 const INITIAL_LIST_STATE = {
   hasError: false,
@@ -71,6 +71,8 @@ export const ListProvider = props => {
 
     if (selectedListType === 'smart-list') {
       listData = await getSmartListDetails(selectedListId);
+    } else if (selectedListType === 'search') {
+      listData = await getSearchListDetails(selectedListId);
     } else {
       listData = await getCustomListDetails(selectedListId);
     }

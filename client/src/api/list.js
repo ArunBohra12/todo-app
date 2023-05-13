@@ -105,3 +105,10 @@ export const getCustomListDetails = handleAsync(async listId => {
     tasks: response.data.data.tasks,
   };
 });
+
+export const getSearchListDetails = handleAsync(async searchInput => {
+  return {
+    listName: searchInput,
+    tasks: [],
+  };
+});
