@@ -1,5 +1,6 @@
 import handleAsync from '../utils/error';
 import axiosRequestInstance, { getAuthorizationHeader } from '../utils/axios';
+import { getAllTasks } from './task';
 
 export const getAllLists = handleAsync(async () => {
   const response = await axiosRequestInstance({
@@ -58,6 +59,22 @@ export const addTaskToList = handleAsync(async ({ listId, taskId }) => {
   }
 
   return [true, response.data.data.list];
+});
+
+export const getAllTasksList = handleAsync(async () => {
+  const [status, data] = await getAllTasks();
+
+  if (status === false) {
+    return {
+      tasks: [],
+      listName: 'All Tasks',
+    };
+  }
+
+  return {
+    tasks: data,
+    listName: 'All Tasks',
+  };
 });
 
 export const getSmartListDetails = handleAsync(async listId => {

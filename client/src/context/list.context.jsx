@@ -1,5 +1,11 @@
 import { useEffect, createContext, useContext, useReducer } from 'react';
-import { getAllLists, getCustomListDetails, getSearchListDetails, getSmartListDetails } from '../api/list';
+import {
+  getAllLists,
+  getAllTasksList,
+  getCustomListDetails,
+  getSearchListDetails,
+  getSmartListDetails,
+} from '../api/list';
 
 const INITIAL_LIST_STATE = {
   hasError: false,
@@ -69,12 +75,22 @@ export const ListProvider = props => {
   const setSelectedListData = async (selectedListType, selectedListId) => {
     let listData = {};
 
-    if (selectedListType === 'smart-list') {
-      listData = await getSmartListDetails(selectedListId);
-    } else if (selectedListType === 'search') {
-      listData = await getSearchListDetails(selectedListId);
-    } else {
-      listData = await getCustomListDetails(selectedListId);
+    switch (selectedListType) {
+      case 'all-tasks':
+        listData = await getAllTasksList();
+        break;
+
+      case 'smart-list':
+        listData = await getSmartListDetails(selectedListId);
+        break;
+
+      case 'search':
+        listData = await getSearchListDetails(selectedListId);
+        break;
+
+      default:
+        listData = await getCustomListDetails(selectedListId);
+        break;
     }
 
     dispatch({ type: LIST_REDUCER_ACTION_TYPES.SET_SELECTED_LIST_DATA, payload: listData });

@@ -5,6 +5,7 @@ import {
   MdStarBorder as StarIcon,
   MdFormatListBulleted as ListIcon,
   MdAdd as AddIcon,
+  MdOutlineHome as HomeIcon,
 } from 'react-icons/md';
 
 import { AVATARS_URL } from '../../config/constants';
@@ -63,6 +64,13 @@ const Sidebar = () => {
         <input className='sidebar__search-input' type='text' placeholder='Search' onChange={taskSearchHandler} />
         <CrossIcon className='sidebar__search-icon' />
       </div>
+
+      <SidebarList
+        icon={<HomeIcon />}
+        title='All Tasks'
+        selected={selectedList.type === 'all-tasks' && selectedList.id === 'all-tasks'}
+        onClick={() => handleSidebarListSelection('all-tasks', 'all-tasks')}
+      />
 
       <div className='sidebar__smart-list'>
         {sidebarSmartList.map(smartListItem => (
