@@ -7,7 +7,7 @@ import TaskItem from '../taskItem/taskItem.component';
 import './taskListGroup.styles.css';
 
 const TaskListGroupItem = () => {
-  const { isLoading, selectedListData } = ListContext();
+  const { isLoading, selectedList, selectedListData } = ListContext();
 
   if (isLoading === true) {
     return (
@@ -34,7 +34,7 @@ const TaskListGroupItem = () => {
         )}
       </div>
 
-      <AddTaskItem />
+      {selectedList.type !== 'search' && <AddTaskItem />}
     </div>
   );
 };
