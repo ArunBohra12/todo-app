@@ -56,6 +56,7 @@ const listReducer = (state = INITIAL_LIST_STATE, action) => {
       return { ...state, selectedListData: payload };
     default:
       console.error(`Unexpected reducer action type: ${type} in listReducer`);
+      break;
   }
 };
 
@@ -79,15 +80,12 @@ export const ListProvider = props => {
       case 'all-tasks':
         listData = await getAllTasksList();
         break;
-
       case 'smart-list':
         listData = await getSmartListDetails(selectedListId);
         break;
-
       case 'search':
         listData = await getSearchListDetails(selectedListId);
         break;
-
       default:
         listData = await getCustomListDetails(selectedListId);
         break;
